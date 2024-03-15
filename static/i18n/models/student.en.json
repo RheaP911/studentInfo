@@ -1,0 +1,117 @@
+{
+  "display_name": "Student",
+  "fields": {
+    "Address": {
+      "display_name": "Address",
+      "help": "BLK/Building, Street, Barangay, Municipality, Province",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Age": {
+      "display_name": "Age",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Birthday": {
+      "display_name": "Birthday",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Contact": {
+      "display_name": "Contact#",
+      "help": "",
+      "pattern_msg": "Your input must be a number.",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Email": {
+      "display_name": "Email",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "HomeNum": {
+      "display_name": "Home Phone #",
+      "help": "",
+      "pattern_msg": "Your input must be a number.",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "ID": {
+      "display_name": "ID",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Name": {
+      "display_name": "Name",
+      "help": "(ex. Dela Cruz, Juan A.)",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Number": {
+      "display_name": "Cellphone #",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Parent": {
+      "display_name": " Parent/Guardian Name",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Photo": {
+      "display_name": "Photo",
+      "help": "Upload a 1x1 photo",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Program": {
+      "display_name": "Program",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Relation": {
+      "display_name": " Relation to Student",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "SRCode": {
+      "display_name": "Student Number",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "School": {
+      "display_name": "School",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Year": {
+      "display_name": "Year",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    }
+  }
+}

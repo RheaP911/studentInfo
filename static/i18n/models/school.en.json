@@ -1,0 +1,47 @@
+{
+  "display_name": "School",
+  "fields": {
+    "Code": {
+      "display_name": "Code Name",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "ID": {
+      "display_name": "ID",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Logo": {
+      "display_name": "Logo",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Name": {
+      "display_name": "Name",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Tuition": {
+      "display_name": "Tuition",
+      "help": "",
+      "pattern_msg": "Your input must be a number.display_name:Tuition per Unit(PHP)",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Website": {
+      "display_name": "Website",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    }
+  }
+}

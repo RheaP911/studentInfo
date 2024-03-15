@@ -1,0 +1,40 @@
+{
+  "display_name": "Program",
+  "fields": {
+    "ID": {
+      "display_name": "ID",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Major": {
+      "display_name": "Major",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Name": {
+      "display_name": "Name",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Program": {
+      "display_name": "Code Name",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "Years": {
+      "display_name": "Years",
+      "help": "",
+      "pattern_msg": "Your input must be a number.",
+      "err_msg": {},
+      "Choices": {}
+    }
+  }
+}
