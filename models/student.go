@@ -95,17 +95,13 @@ func (sNum *Student) Save() {
 		if uadmin.Count(&students, "name = ? AND id <> ?", sNum.Name, sNum.ID) == 0 {
 			AYear := sNum.Year
 			currentYear := time.Now().Year() % 100
+
+			baseCount := uadmin.Count(&students, "year = ?", sNum.Year)
 	
-			if len(generatedNum) == 0 {
-				generatedNum = append(generatedNum, 0)
-			}
-	
-			lastNum := (generatedNum)[len(generatedNum)-1]
-			newNum := lastNum + 1
-			generatedNum = append(generatedNum, newNum)
+			recentCount := baseCount + 1
 	
 			width := 5
-			uniqueNum := fmt.Sprintf("%0*d", width, newNum)
+			uniqueNum := fmt.Sprintf("%0*d", width, recentCount)
 			
 			switch AYear {
 			case 1:
