@@ -42,6 +42,20 @@
       "pattern_msg": "",
       "err_msg": {},
       "Choices": {}
+    },
+    "WebsiteBtn": {
+      "display_name": "Website",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
+    "WebsiteLink": {
+      "display_name": "Website Link",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
     }
   }
 }

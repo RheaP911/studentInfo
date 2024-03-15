@@ -107,7 +107,7 @@
       "Choices": {}
     },
     "Year": {
-      "display_name": "Year",
+      "display_name": "Year Level",
       "help": "",
       "pattern_msg": "",
       "err_msg": {},

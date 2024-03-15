@@ -2,13 +2,13 @@ package models
 
 import (
 	"fmt"
+	"math/rand/v2"
 	"strconv"
 	"time"
 
 	"github.com/uadmin/uadmin"
 )
 
-var generatedNum = []int{}
 
 type Relation int
 
@@ -50,11 +50,11 @@ type Student struct {
 	uadmin.Model
 	SRCode   string    `uadmin:"read_only;display_name:Student Number;search"`
 	Name     string    `uadmin:"help:(ex. Dela Cruz, Juan A.);search"`
-	Address  string    `uadmin:"help:BLK/Building, Street, Barangay, Municipality, Province;search"`
+	Address  string    `uadmin:"list_exclude;help:BLK/Building, Street, Barangay, Municipality, Province;search"`
 	Birthday time.Time `uadmin:"list_exclude"`
 	Contact  string    `uadmin:"display_name:Contact#;pattern:^[0-9]*$;pattern_msg:Your input must be a number."`
 	Email    string
-	Year     Year `uadmin:"required"`
+	Year     Year `uadmin:"required;display_name:Year Level"`
 
 	Program   Program `uadmin:"required"`
 	ProgramID uint
@@ -84,43 +84,52 @@ func (s Student) Validate() (errMsg map[string]string) {
 	return
 }
 
-// Save Student Number
-// Filter by year
-// Count students by year
-// Increment 
 func (sNum *Student) Save() {
 	students := Student{}
 	studNum := sNum.SRCode
+	
+
 	if studNum == "" {
 		if uadmin.Count(&students, "name = ? AND id <> ?", sNum.Name, sNum.ID) == 0 {
-			AYear := sNum.Year
+			AYear := int(sNum.Year)
 			currentYear := time.Now().Year() % 100
 
 			baseCount := uadmin.Count(&students, "year = ?", sNum.Year)
-	
 			recentCount := baseCount + 1
-	
+
+			yearString := strconv.Itoa(currentYear - AYear)
+
+			uadmin.Preload(sNum)
+			codeName := sNum.School.Code
+
+			alphabets := "ABCDEFGHJKLMNPQRSTUVWXY"
+			randomIndex := rand.IntN(len(alphabets))
+			randomAlphabets := alphabets[randomIndex]
+			randAlphString := string(randomAlphabets)
+
 			width := 5
 			uniqueNum := fmt.Sprintf("%0*d", width, recentCount)
-			
-			switch AYear {
-			case 1:
-				yearString := strconv.Itoa(currentYear - 1)
-				sNum.SRCode = yearString + "-" + uniqueNum
-			case 2:
-				yearString := strconv.Itoa(currentYear - 2)
-				sNum.SRCode = yearString + "-" + uniqueNum
-			case 3:
-				yearString := strconv.Itoa(currentYear - 3)
-				sNum.SRCode = yearString + "-" + uniqueNum
-			case 4:
-				yearString := strconv.Itoa(currentYear - 4)
-				sNum.SRCode = yearString + "-" + uniqueNum
-			default:
-				yearString := strconv.Itoa(currentYear - 5)
-				sNum.SRCode = yearString + "-" + uniqueNum
-			
-			}
+
+			sNum.SRCode = yearString + "-" + codeName + uniqueNum + randAlphString
+
+			// switch AYear {
+			// case 1:
+			// 	yearString := strconv.Itoa(currentYear - 1)
+				
+			// case 2:
+			// 	yearString := strconv.Itoa(currentYear - 2)
+			// 	sNum.SRCode = yearString + "-" + uniqueNum
+			// case 3:
+			// 	yearString := strconv.Itoa(currentYear - 3)
+			// 	sNum.SRCode = yearString + "-" + uniqueNum
+			// case 4:
+			// 	yearString := strconv.Itoa(currentYear - 4)
+			// 	sNum.SRCode = yearString + "-" + uniqueNum
+			// default:
+			// 	yearString := strconv.Itoa(currentYear - 5)
+			// 	sNum.SRCode = yearString + "-" + uniqueNum
+
+			// }
 		}
 	} else {
 		sNum.SRCode = studNum
