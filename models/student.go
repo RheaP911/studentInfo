@@ -87,7 +87,7 @@ func (s Student) Validate() (errMsg map[string]string) {
 // Save Student Number
 // Filter by year
 // Count students by year
-// Increment +1
+// Increment 
 func (sNum *Student) Save() {
 	students := Student{}
 	studNum := sNum.SRCode
