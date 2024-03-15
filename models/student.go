@@ -85,6 +85,9 @@ func (s Student) Validate() (errMsg map[string]string) {
 }
 
 // Save Student Number
+// Filter by year
+// Count students by year
+// Increment
 func (sNum *Student) Save() {
 	students := Student{}
 	studNum := sNum.SRCode
@@ -120,6 +123,7 @@ func (sNum *Student) Save() {
 			default:
 				yearString := strconv.Itoa(currentYear - 5)
 				sNum.SRCode = yearString + "-" + uniqueNum
+			
 			}
 		}
 	} else {
