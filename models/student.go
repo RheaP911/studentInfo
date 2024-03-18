@@ -2,13 +2,12 @@ package models
 
 import (
 	"fmt"
-	"math/rand/v2"
+	"math/rand"
 	"strconv"
 	"time"
 
 	"github.com/uadmin/uadmin"
 )
-
 
 type Relation int
 
@@ -54,13 +53,14 @@ type Student struct {
 	Birthday time.Time `uadmin:"list_exclude"`
 	Contact  string    `uadmin:"display_name:Contact#;pattern:^[0-9]*$;pattern_msg:Your input must be a number."`
 	Email    string
-	Year     Year `uadmin:"required;display_name:Year Level"`
+	Year     Year `uadmin:"required;display_name:Year Level;search"`
 
 	Program   Program `uadmin:"required"`
 	ProgramID uint
 
 	School   School `uadmin:"required"`
 	SchoolID uint
+	Code     string `uadmin:"read_only;display_name:School Code;list_exclude"`
 
 	Parent   string   `uadmin:"display_name: Parent/Guardian Name;;list_exclude"`
 	Relation Relation `uadmin:"display_name: Relation to Student;list_exclude"`
@@ -68,11 +68,6 @@ type Student struct {
 
 	Photo string `uadmin:"image;webcam;help:Upload a 1x1 photo"`
 }
-
-//Function that generates Student Number
-//Check details
-//If items do not match, generate a new student number
-//Student number must be consecutive
 
 func (s Student) Validate() (errMsg map[string]string) {
 	errMsg = map[string]string{}
@@ -87,52 +82,31 @@ func (s Student) Validate() (errMsg map[string]string) {
 func (sNum *Student) Save() {
 	students := Student{}
 	studNum := sNum.SRCode
-	
+
+	uadmin.Preload(sNum)
+	codeName := sNum.School.Code
+
+	sNum.Code = codeName
 
 	if studNum == "" {
-		if uadmin.Count(&students, "name = ? AND id <> ?", sNum.Name, sNum.ID) == 0 {
-			AYear := int(sNum.Year)
-			currentYear := time.Now().Year() % 100
+		AYear := int(sNum.Year)
+		currentYear := time.Now().Year() % 100
+		yearString := strconv.Itoa(currentYear - AYear)
 
-			baseCount := uadmin.Count(&students, "year = ?", sNum.Year)
-			recentCount := baseCount + 1
+		baseCount := uadmin.Count(&students, "year = ? AND code = ?", sNum.Year, sNum.Code)
+		recentCount := baseCount + 1
 
-			yearString := strconv.Itoa(currentYear - AYear)
-
-			uadmin.Preload(sNum)
-			codeName := sNum.School.Code
-
-			alphabets := "ABCDEFGHJKLMNPQRSTUVWXY"
-			randomIndex := rand.IntN(len(alphabets))
-			randomAlphabets := alphabets[randomIndex]
-			randAlphString := string(randomAlphabets)
-
-			width := 5
-			uniqueNum := fmt.Sprintf("%0*d", width, recentCount)
-
-			sNum.SRCode = yearString + "-" + codeName + uniqueNum + randAlphString
-
-			// switch AYear {
-			// case 1:
-			// 	yearString := strconv.Itoa(currentYear - 1)
-				
-			// case 2:
-			// 	yearString := strconv.Itoa(currentYear - 2)
-			// 	sNum.SRCode = yearString + "-" + uniqueNum
-			// case 3:
-			// 	yearString := strconv.Itoa(currentYear - 3)
-			// 	sNum.SRCode = yearString + "-" + uniqueNum
-			// case 4:
-			// 	yearString := strconv.Itoa(currentYear - 4)
-			// 	sNum.SRCode = yearString + "-" + uniqueNum
-			// default:
-			// 	yearString := strconv.Itoa(currentYear - 5)
-			// 	sNum.SRCode = yearString + "-" + uniqueNum
-
-			// }
+		alphabets := "ABCDEFGHJKLMNPQRSTUVWXYZ"
+		randAlphString := ""
+		for i := 0; i < 2; i++ {
+			randomIndex := rand.Intn(len(alphabets))
+			randAlphString += string(alphabets[randomIndex])
 		}
-	} else {
-		sNum.SRCode = studNum
+
+		width := 5
+		uniqueNum := fmt.Sprintf("%0*d", width, recentCount)
+
+		sNum.SRCode = yearString + "-" + codeName + uniqueNum + randAlphString
 	}
 	uadmin.Save(sNum)
 }

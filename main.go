@@ -1,15 +1,12 @@
 package main
 
 import (
-	"net/http"
-
-	"github.com/RheaP911/studentInfo/api"
 	"github.com/RheaP911/studentInfo/models"
 	"github.com/uadmin/uadmin"
 )
 
 func main() {
-	uadmin.Register (
+	uadmin.Register(
 		models.Student{},
 		models.Program{},
 		models.School{},
@@ -22,16 +19,15 @@ func main() {
 		"Student": "SchoolID",
 	})
 
-	http.HandleFunc("/api/", uadmin.Handler(api.Handler))
-    uadmin.StartServer()
+	//http.HandleFunc("/api/", uadmin.Handler(api.Handler))
+	uadmin.StartServer()
 
-	InitializeRootURL()
+	// InitializeRootURL()
 }
 
-func InitializeRootURL() {
-	setting := uadmin.Setting{}
-	uadmin.Get(&setting, "code = ?", "uAdmin.RootURL")
-	setting.ParseFormValue([]string{"/admin/"})
-	setting.Save()
-}
-
+// func InitializeRootURL() {
+// 	setting := uadmin.Setting{}
+// 	uadmin.Get(&setting, "code = ?", "uAdmin.RootURL")
+// 	setting.ParseFormValue([]string{"/admin/"})
+// 	setting.Save()
+// }

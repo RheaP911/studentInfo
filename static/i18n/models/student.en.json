@@ -22,6 +22,13 @@
       "err_msg": {},
       "Choices": {}
     },
+    "Code": {
+      "display_name": "School Code",
+      "help": "",
+      "pattern_msg": "",
+      "err_msg": {},
+      "Choices": {}
+    },
     "Contact": {
       "display_name": "Contact#",
       "help": "",
